@@ -12,7 +12,7 @@ exports.debug = (title, obj, status) => {
   const output = seperator + title + '\n' + time + seperator + JSON.stringify(obj);
 
   // Checks if status is null otherwise displays it
-  if (status != null) {
+  if (status == null) {
     console.warn('Status is null');
   } else {
     console.log('Status: ' + status);
