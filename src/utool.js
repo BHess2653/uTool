@@ -27,6 +27,10 @@ exports.debug = (title, obj, status) => {
   }
 };
 
+// bump method gets exported, currentVersion needs to be an object with the
+// .hotfix, .minor, and .major properties
+// typeOfUpdate needs to be a string that is either hotfix, minor, major
+// Suggests the version bump based on the type of update you want to do.
 exports.bump = (currentVersion, typeOfUpdate) => {
   let hotfix = currentVersion.hotfix;
   let minor = currentVersion.minor;
