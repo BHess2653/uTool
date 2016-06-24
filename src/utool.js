@@ -32,7 +32,7 @@ exports.debug = (title, obj, status) => {
 // typeOfUpdate needs to be a string that is either patch, minor, major
 // Suggests the version bump based on the type of update you want to do.
 exports.bump = (currentVersion, typeOfUpdate) => {
-  let patch = currentVersion.hotfix;
+  let patch = currentVersion.patch;
   let minor = currentVersion.minor;
   let major = currentVersion.major;
   if (typeof typeOfUpdate) {
