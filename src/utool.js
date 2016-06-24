@@ -43,7 +43,7 @@ exports.bump = (currentVersion, typeOfUpdate) => {
       minor += 1;
     }
     if (typeOfUpdate === 'major') {
-      hotfix = 0;
+      patch = 0;
       minor = 0;
       major += 1;
     }
