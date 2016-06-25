@@ -1,6 +1,5 @@
-exports.debug = (title, obj) => {
+exports.debug = (title, obj, status) => {
   const colors = require('colors');
-  const fs = require('fs');
   const seperator = '\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n';
   const time = new Date();
   colors.setTheme({
@@ -12,10 +11,44 @@ exports.debug = (title, obj) => {
   });
   const output = seperator + title + '\n' + time + seperator + JSON.stringify(obj);
 
-  if (process.env.DEBUG) {
-    fs.appendFile('logs/eLog.log', output, 'utf8', (err) =>{
-      if (err) throw err;
-    });
-    console.log(output);
+  // Checks if status is null otherwise displays it
+  if (status == null) {
+    console.warn('Status is null');
+  } else {
+    console.log('Status: ' + status);
   }
+ // Removed stream writer and have the logs going to the console
+  if (process.env.DEBUG) {
+      console.log(output);
+    } else {
+      console.error(new Error('Environmental Variable DEBUG not true'));
+    }
+
+  }
+};
+
+// bump method gets exported, currentVersion needs to be an object with the
+// .hotfix, .minor, and .major properties
+// typeOfUpdate needs to be a string that is either patch, minor, major
+// Suggests the version bump based on the type of update you want to do.
+exports.bump = (currentVersion, typeOfUpdate) => {
+  let patch = currentVersion.patch;
+  let minor = currentVersion.minor;
+  let major = currentVersion.major;
+  if (typeof typeOfUpdate) {
+    if (typeOfUpdate === 'patch') {
+      patch += 1;
+    }
+    if (typeOfUpdate === 'minor') {
+      minor += 1;
+    }
+    if (typeOfUpdate === 'major') {
+      patch = 0;
+      minor = 0;
+      major += 1;
+    }
+  } else {
+    console.warn('Please for your second argument please type in patch, minor, or major');
+  }
+  console.log('Your new version number should be: ' + major + '.' + minor + '.' + patch);
 };
